@@ -7,9 +7,11 @@ public class PlayerMovement : MonoBehaviour
 {
     [HideInInspector] public bool jump = false;
     private bool grounded = false;
+    private bool ground;
     public float jumpForce = 1000f;
 
     public float speed;
+    
     void Update()
     {
         var x = Input.GetAxis("Horizontal") * Time.deltaTime * 400.0f;
@@ -31,13 +33,21 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate ()
     {
-        if (jump)
+        if (jump && ground)
         {
 
             GetComponent<Rigidbody>().AddForce(new Vector3(0f, jumpForce));
             jump = false;
+            ground = false;
         }
 
     }
-    
+     void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            ground = true;
+        }
+    }
+
 }

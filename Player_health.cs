@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Player_health : MonoBehaviour {
-    private float health = 24;
+    public float health = 24;
     private float damage = 1;
     private AudioSource source;
     private bool hit = false;
